@@ -150,3 +150,4 @@ Não há backend, cookies, rastreamento ou banco de dados. Os dados do formulár
 ## Créditos
 
 Desenvolvido para **KATHERINE BRAIDS**. Fotografias pertencem à profissional e devem ser publicadas somente com as autorizações necessárias.
+"# Katherine-braids"  
