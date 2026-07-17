@@ -22,20 +22,38 @@ function setupWhatsAppLinks() {
 function setupMenu() {
   const toggle = document.querySelector('.menu-toggle');
   const nav = document.querySelector('.main-nav');
+  let scrollPos = 0;
+
   const closeMenu = () => {
     toggle.setAttribute('aria-expanded', 'false');
     toggle.setAttribute('aria-label', 'Abrir menu');
     nav.classList.remove('open');
     document.body.classList.remove('menu-open');
+    document.body.style.top = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+    window.scrollTo(0, scrollPos);
   };
+
   toggle.addEventListener('click', () => {
     const opening = toggle.getAttribute('aria-expanded') !== 'true';
+    if (opening) {
+      scrollPos = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollPos}px`;
+      document.body.style.width = '100%';
+    } else {
+      closeMenu();
+      return;
+    }
     toggle.setAttribute('aria-expanded', String(opening));
     toggle.setAttribute('aria-label', opening ? 'Fechar menu' : 'Abrir menu');
     nav.classList.toggle('open', opening);
     document.body.classList.toggle('menu-open', opening);
   });
+
   nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && nav.classList.contains('open')) {
       closeMenu();
